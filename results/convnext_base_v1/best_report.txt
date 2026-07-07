@@ -1,0 +1,9 @@
+              precision    recall  f1-score   support
+
+  Recyclable     0.9562    0.9610    0.9586      2000
+  Electronic     0.9874    0.9899    0.9887       792
+     Organic     0.9712    0.9666    0.9689      2514
+
+    accuracy                         0.9680      5306
+   macro avg     0.9716    0.9725    0.9721      5306
+weighted avg     0.9680    0.9680    0.9680      5306

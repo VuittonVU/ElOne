@@ -1,0 +1,15 @@
+# Install PyTorch CUDA separately first, for example:
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
+
+timm
+albumentations
+opencv-python
+pandas
+numpy
+scikit-learn
+matplotlib
+seaborn
+tqdm
+pyyaml
+pillow
+tensorboard

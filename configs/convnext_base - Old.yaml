@@ -1,0 +1,67 @@
+# BDC Satria Data 2026 - Training Config V1
+# Edit data_dir according to your local dataset location.
+
+data_dir: "D:/Dataset BDC26"
+train_dir: "train"
+test_dir: "test"
+submission_file: "submission.csv"
+
+class_folders:
+  0_Recyclable: 0
+  1_Electronic: 1
+  2_Organic: 2
+
+# Model
+model_name: "convnext_base"   # for GTX 1650 Ti 4GB, if OOM use convnext_tiny
+pretrained: true
+num_classes: 3
+
+# Image/training
+image_size: 224
+batch_size: 2                 # safe for ConvNeXt Base on 4GB VRAM; if OOM use 1
+num_workers: 2
+pin_memory: true
+
+# Experiment control
+seed: 42
+val_size: 0.2
+epochs: 20
+max_epochs_per_run: 5         # train only 2 epochs per command, then stop safely
+time_limit_hours: 12           # also stop if runtime exceeds this; set null to disable
+resume: true
+
+# Optimization
+learning_rate: 0.0001
+weight_decay: 0.0001
+label_smoothing: 0.05
+use_class_weights: true       # IMPORTANT: EDA found Electronic is minority class
+class_weight_power: 1.0       # 1.0 = inverse frequency; 0.5 = softer weights
+optimizer: "adamw"
+scheduler: "cosine"          # cosine or none
+
+# Regularization / augmentations
+hflip_prob: 0.5
+brightness_contrast_prob: 0.25
+random_erasing_prob: 0.1
+
+# Performance
+use_amp: true
+channels_last: true
+grad_clip_norm: 1.0
+
+# Early stopping
+early_stopping_patience: 6
+metric_mode: "max"
+
+# Outputs
+output_dir: "."
+weights_dir: "weights"
+logs_dir: "logs"
+results_dir: "results"
+submissions_dir: "submissions"
+run_name: "convnext_base_v1"
+
+# Inference
+checkpoint_name: "best.pth"
+submission_name: "submission_convnext_base_v1.csv"
+tta_hflip: true
